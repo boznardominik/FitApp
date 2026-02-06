@@ -1,0 +1,113 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              
+             xmlns:vm="using:FitApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+             x:Class="FitApp.Views.VnosView"
+             x:DataType="vm:VnosViewModel"            
+             Width="400"
+             Height="600">
+      
+
+            
+            <StackPanel VerticalAlignment="Top"
+                        HorizontalAlignment="Left" 
+                        Margin="13">
+              <TextBlock DockPanel.Dock="Top"
+                        Text="Vpiši svoje podatke"
+                        VerticalAlignment="Top"
+                        
+                         Margin="15,30,0,0"
+                        FontWeight="Bold"
+                        FontSize="20"
+                         
+                       />
+
+             
+             
+             <StackPanel HorizontalAlignment="Left"
+                          Margin="50,10,0,0">
+                 <TextBlock DockPanel.Dock="Bottom"
+                        Text="Spol:"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="-30,5,0,0"
+                        
+                       />
+                 <RadioButton Content="Moški" IsChecked="True" Margin="-30,5,0,0"  />
+                 <RadioButton Content="Ženska"  Margin="-30,0,0,0" />
+
+                 <TextBlock DockPanel.Dock="Bottom"
+                        Text="Starost:"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="-30,10,0,0"/>
+                <TextBox Text="{Binding Starost}"  Margin="-30,10,0,0" Watermark="vpiši starost" >
+					
+                </TextBox>
+                 <TextBlock DockPanel.Dock="Bottom"
+                            
+                        Text="Teža(kg):"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="-30,10,0,0"/>
+                  <TextBox Text="{Binding Teza}" Margin="-30,10,0,0" Watermark="vpiši težo" >
+					
+                </TextBox>
+                   <TextBlock DockPanel.Dock="Bottom"
+                        Text="Višina(cm):"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="-30,10,0,0"/>
+                  <TextBox Text="{Binding Visina}" Margin="-30,10,0,0" Watermark="vpiši višino" >
+					
+                </TextBox>
+                   <TextBlock  DockPanel.Dock="Bottom"
+                        Text="% telesne maščobe: "
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="-30,15,0,0"
+                       />
+                  <Slider  Value="{Binding Forma}"
+                            Minimum="4"
+                           Maximum="30"
+            
+                          TickFrequency="1"
+                          IsSnapToTickEnabled="True"
+                          Width="230"
+                          Margin="-30,-5,0,0"
+                          
+             />
+                 <TextBlock  DockPanel.Dock="Bottom"
+                        Text="{Binding Forma}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="-30,-10,0,0"
+                       />
+                 
+
+                 <Button Command="{Binding ShraniCommand}"
+                         Margin="-30,20,0,0">Shrani</Button>
+                 <TextBlock  DockPanel.Dock="Bottom"
+                        Text="{Binding ErrorMessage}"
+                        Foreground="Red"
+                        
+                        
+                        Margin="-30,0,0,0"
+                       />
+                 <TextBlock Text="{Binding Info}" />
+
+                 
+
+                
+
+                        
+                        
+               </StackPanel>
+          
+             </StackPanel>
+
+   
+</UserControl>

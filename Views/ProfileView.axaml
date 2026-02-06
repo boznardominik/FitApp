@@ -1,0 +1,60 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:FitApp.ViewModels"  
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FitApp.Views.ProfileView"
+             x:DataType="vm:ProfileViewModel">
+<StackPanel Margin="20" HorizontalAlignment="Left" Width="520" Spacing="12">
+
+  <TextBlock Text="Podatki profila"
+             FontSize="22"
+             FontWeight="Bold"
+             Margin="0,0,0,6"/>
+
+  <Border BorderBrush="Gray"
+          BorderThickness="2"
+          CornerRadius="8"
+          Padding="14"
+          Background="White">
+
+    <StackPanel Spacing="10">
+
+      <Grid ColumnDefinitions="140,*"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+            RowSpacing="6">
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Spol:"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TaProfil.Spol}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Starost:"/>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Text="{Binding TaProfil.Starost, StringFormat='{}{0} let'}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Teža:"/>
+        <TextBlock Grid.Row="2" Grid.Column="1"
+                   Text="{Binding TaProfil.Teza, StringFormat='{}{0} kg'}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Višina:"/>
+        <TextBlock Grid.Row="3" Grid.Column="1"
+                   Text="{Binding TaProfil.Visina, StringFormat='{}{0} cm'}"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Forma:"/>
+        <TextBlock Grid.Row="4" Grid.Column="1"
+                   Text="{Binding TaProfil.Forma, StringFormat='{}{0}%'}"/>
+      </Grid>
+
+      <Border Height="1" Background="#DDDDDD" />
+
+      <TextBlock Text="Zanimivost:" FontWeight="Bold"/>
+
+      <TextBlock Text="{Binding Bpm, StringFormat='{}Tvoje telo v enem dnevu pokuri približno {0:F0} kalorij, če samo počivaš.'}"
+                 TextWrapping="Wrap"/>
+
+    </StackPanel>
+  </Border>
+
+</StackPanel>
+
+</UserControl>

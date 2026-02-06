@@ -1,0 +1,56 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FitApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="800"
+        x:Class="FitApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="FitApp"
+        Width="1000"
+        Height="800">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    
+    <DockPanel>
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top"
+                    Margin="0,0,0,0"
+                    Spacing="13"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    IsVisible="{Binding VidnostNavigacij}"
+                    >
+
+
+            <Button Command="{Binding PokaziAktivnostiCommand}"  Content="AKTIVNOSTI"></Button>
+
+            <Button Content="STATISTIKA" Command="{Binding PokaziStatistikeCommand}"></Button>
+
+             <Menu>
+                <MenuItem Header="PROFIL">
+                    <MenuItem Header="Prikaži profil"
+                       Command="{Binding PokaziProfilCommand}" />
+                    <MenuItem Header="Spremeni profil"
+                       Command="{Binding PokaziVnosCommand}" />
+               </MenuItem>
+            </Menu>
+
+
+                    
+                    
+          </StackPanel >
+       <ContentControl Content="{Binding CurrentViewModel}"
+                       VerticalAlignment="Top" 
+                       Margin="30,0,0,0"/> 
+
+		
+    </DockPanel>
+
+</Window>

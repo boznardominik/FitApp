@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:FitApp.ViewModels"
+             x:Class="FitApp.Views.StatisticsView"
+             x:DataType="vm:StatisticsViewModel"
+             >
+ <StackPanel Margin="20" HorizontalAlignment="Left" Width="520" Spacing="12">
+
+  <TextBlock Text="Statistika"
+             FontSize="22"
+             FontWeight="Bold"
+             Margin="0,0,0,6"/>
+     <TextBlock Text="{Binding SkupnaPot, StringFormat='Skupna pot: {0} km.'}"
+             
+             FontWeight="Bold"
+             Margin="0,0,0,6"/>
+
+
+
+     </StackPanel>
+</UserControl>
