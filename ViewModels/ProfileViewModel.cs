@@ -18,22 +18,26 @@ namespace FitApp.ViewModels
     {
 
         [ObservableProperty]
-        private Profil taProfil;
+        private Profil? taProfil;
 
         [ObservableProperty]
-        private double bpm;
+        private double bmr;
+        
 
         public ProfileViewModel()
         {
             OsveziProfil();
-            bpm = Izracuni.BMR(taProfil);
+            bmr = Izracuni.BMR(taProfil);
+            Console.WriteLine(TaProfil.Spol);
 
         }
 
         [RelayCommand]
-        private void OsveziProfil()
+        public void OsveziProfil()
         {
-            TaProfil = Profil.Preberi();   
+            TaProfil = Profil.Preberi();
+            bmr = Izracuni.BMR(TaProfil);
+            
         }
 
     }

@@ -36,8 +36,8 @@
                         Margin="-30,5,0,0"
                         
                        />
-                 <RadioButton Content="Moški" IsChecked="True" Margin="-30,5,0,0"  />
-                 <RadioButton Content="Ženska"  Margin="-30,0,0,0" />
+                 <RadioButton IsChecked="{Binding JeMoski, Mode=TwoWay}" GroupName="Spol" Content="Moški"  Margin="-30,5,0,0"  />
+                 <RadioButton IsChecked="{Binding JeZenska, Mode=TwoWay}" GroupName="Spol" Content="Ženska"  Margin="-30,0,0,0" />
 
                  <TextBlock DockPanel.Dock="Bottom"
                         Text="Starost:"

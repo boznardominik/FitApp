@@ -3,9 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:FitApp.ViewModels"            
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="FitApp.Views.ActivitiesView"
              x:DataType="vm:ActivitiesViewModel"
+            Width="900"
+            Height="800"
              >
        <StackPanel Margin="16" Spacing="3">
 
@@ -13,7 +15,8 @@
 <Grid Margin="16" ColumnDefinitions="*,360" ColumnSpacing="16">
 
     <StackPanel Grid.Column="0" Spacing="3">
-     
+        <TextBlock
+        >Naslov:</TextBlock>
         <TextBox Watermark="Naslov" Text="{Binding NaslovU, Mode=TwoWay}" Width="230"
         HorizontalAlignment="Left"/>
 
@@ -34,16 +37,18 @@
                      HorizontalAlignment="Left"
                 Margin="0,-10,0,0">
           </Slider>
-
+           <TextBlock
+            >Pot (km):</TextBlock>
            <TextBox Watermark="Pot (km)" Text="{Binding PotU, Mode=TwoWay}" Width="230"
              HorizontalAlignment="Left"/>
-     
+            <TextBlock
+            >Višinska (m):</TextBlock>
            <TextBox Watermark="Višinska (m)" Text="{Binding VisinskaU, Mode=TwoWay}" Width="230"
            HorizontalAlignment="Left"/>
 
            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red"/> 
        </StackPanel>
-       <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" 
+       <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" IsVisible="{Binding Izbrano}"
             CornerRadius="8" Padding="12">
           <StackPanel Spacing="8" IsVisible="{Binding VidnostPodrobnosti}">
                
@@ -59,41 +64,69 @@
    </Grid>
    
 
-    <StackPanel Orientation="Horizontal" Spacing="10">
-      <Button Content="Dodaj" Command="{Binding AddActivityCommand}"/>
-      <Button Content="Izbriši" Command="{Binding RemoveSelectedCommand}"/>
-      <ComboBox
-         ItemsSource="{Binding SortKriteriji}"
-         SelectedItem="{Binding IzbranSort, Mode=TwoWay}"
-          Width="200"/>
-      <Button Content="Sortiraj" Command="{Binding SortCommand}"/>
-      <Button Content="Podrobnosti" Command="{ Binding RezultatiCommand}"></Button>
-      
-     
+<Grid ColumnDefinitions="*,Auto" Margin="0,10,0,0">
+
+    <!-- LEFT SIDE BUTTONS -->
+    <StackPanel Orientation="Horizontal" Spacing="10" Grid.Column="0">
+        <Button Content="Dodaj"
+                Command="{Binding AddActivityCommand}"/>
+
+        <Button Content="Izbriši"
+                Command="{Binding RemoveSelectedCommand}"/>
+
+        <Button Content="Podrobnosti"
+                Command="{Binding RezultatiCommand}"/>
     </StackPanel>
 
-    <!-- SEZNAM -->
-    <ListBox ItemsSource="{Binding Aktivnosti}"
-             SelectedItem="{Binding IzbranaAktivnost, Mode=TwoWay}" 
-             Height="500"
-             SelectionMode="Multiple">
-       
-      <ListBox.ItemTemplate >
-        <DataTemplate>
-          <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="6" Padding="8" Margin="0,0,0,6">
-            <StackPanel>
-              <TextBlock Text="{Binding Naslov}" FontWeight="Bold"/>
-              <TextBlock Text="{Binding Vrsta}"/>
-              <TextBlock Text="{Binding Pot, StringFormat='Pot: {0} km'}"/>
-              <TextBlock Text="{Binding Hitrost, StringFormat='Hitrost: {0:F2} km/h'}"/>
-              <TextBlock Text="{Binding Visinska, StringFormat='Višinska: {0} m'}"/>
-            </StackPanel>
-          </Border>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
+    <!-- RIGHT SIDE CONTROLS -->
+    <StackPanel Orientation="Horizontal" Spacing="10" Grid.Column="1">
+        <ComboBox ItemsSource="{Binding SortKriteriji}"
+                  SelectedItem="{Binding IzbranSort, Mode=TwoWay}"
+                  Width="200"/>
 
-    <TextBlock Text="{Binding Info}" Foreground="DarkGreen"/>
+        <Button Content="Sortiraj"
+                Command="{Binding SortCommand}"/>
+        <TextBlock Text="{Binding SteviloAktivnosti, StringFormat=' ({0} aktivnosti)'}" Foreground="#1976D2"
+                   FontWeight="Bold"  Margin="0,5,0,0" />
+    </StackPanel>
+
+</Grid>
+
+   
+   <ListBox ItemsSource="{Binding Aktivnosti}"
+         SelectedItem="{Binding IzbranaAktivnost, Mode=TwoWay}"
+         SelectionMode="Multiple"
+         Margin="0,10,0,0">
+
+  <ListBox.ItemsPanel>
+    <ItemsPanelTemplate>
+      <WrapPanel Orientation="Horizontal"
+                 ItemWidth="260"
+                 ItemHeight="140"/>
+    </ItemsPanelTemplate>
+  </ListBox.ItemsPanel>
+
+  <ListBox.ItemTemplate>
+    <DataTemplate>
+      <Border BorderThickness="1"
+              BorderBrush="#B0C4DE"
+              CornerRadius="8"
+              Padding="10"
+              Margin="6">
+        <StackPanel Spacing="4">
+          <TextBlock Text="{Binding Naslov}" FontWeight="Bold" FontSize="14"/>
+          <TextBlock Text="{Binding Vrsta}"/>
+          <TextBlock Text="{Binding Pot, StringFormat='Pot: {0} km'}"/>
+          <TextBlock Text="{Binding Hitrost, StringFormat='Hitrost: {0:F1} km/h'}"/>
+          <TextBlock Text="{Binding Visinska, StringFormat='Višinska: {0} m'}"/>
+        </StackPanel>
+      </Border>
+    </DataTemplate>
+  </ListBox.ItemTemplate>
+
+</ListBox>
+
+   
 
   </StackPanel>
 

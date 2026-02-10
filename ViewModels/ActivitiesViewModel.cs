@@ -21,6 +21,8 @@ namespace FitApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<Aktivnost> aktivnosti;
 
+        [ObservableProperty]
+        private int steviloAktivnosti;
         
         [ObservableProperty]
         private Aktivnost izbranaAktivnost;
@@ -30,6 +32,7 @@ namespace FitApp.ViewModels
         private List<string> sortKriteriji = new List<string> { "Naslov", "Vrsta", "Hitrost", "Pot" };
         [ObservableProperty]
         private string izbranSort = "Vrsta";
+
         [ObservableProperty]
         private string naslovU = "";
         
@@ -59,19 +62,20 @@ namespace FitApp.ViewModels
         public IEnumerable<VrstaAktivnosti> Vrste { get; } = Enum.GetValues<VrstaAktivnosti>();
              
 
-        // ===== UI SPOROČILA =====
+        
         [ObservableProperty] private string errorMessage = "";
-        [ObservableProperty] private string info = "";
+        
 
         public ActivitiesViewModel()
         {
             
             Aktivnosti = Aktivnost.PreberiVse();
+            SteviloAktivnosti = Aktivnosti.Count();
         }
 
-        // ===== COMMANDI =====
+        
         [RelayCommand]
-        private void Sort() // se ne deluje
+        private void Sort() 
         { 
             Aktivnosti = Aktivnost.PreberiVse();
             switch (IzbranSort)
@@ -100,11 +104,12 @@ namespace FitApp.ViewModels
 
         }
 
+
         [RelayCommand]
         private void AddActivity()
         {
             ErrorMessage = "";
-            Info = "";
+            
 
             if (VrstaU == null)
             {
@@ -127,10 +132,12 @@ namespace FitApp.ViewModels
             }
             if(ErrorMessage == "")
             {
+                
                 Aktivnost aktivnost = new Aktivnost(NaslovU, VrstaU, PotU, HitrostU, VisinskaU);
                 Aktivnosti.Add(aktivnost);
                 Aktivnost.ShraniVse(Aktivnosti);
                 Aktivnosti = Aktivnost.PreberiVse();
+                SteviloAktivnosti = Aktivnosti.Count();
             }
 
             
@@ -149,6 +156,7 @@ namespace FitApp.ViewModels
             {
                 Aktivnosti.Remove(IzbranaAktivnost);
                 Aktivnost.ShraniVse(Aktivnosti);
+                SteviloAktivnosti = Aktivnosti.Count();
             }
 
         }
@@ -195,11 +203,14 @@ namespace FitApp.ViewModels
         [ObservableProperty]
         private bool vidnostPodrobnosti;
 
+        [ObservableProperty]
+        private bool izbrano = false;
+
         [RelayCommand]
         private void Rezultati()
         {
 
-            
+            Izbrano = true;
 
             Profil profil = Profil.Preberi();
             
@@ -218,6 +229,12 @@ namespace FitApp.ViewModels
                 VidnostPodrobnosti = true;
             }
             VidnostPodrobnosti = true;
+        }
+        [ObservableProperty]
+        private string dosezek = "fd";
+        private void Dosezki()
+        {
+            Console.WriteLine("Dosezek");
         }
 
 

@@ -49,7 +49,7 @@
 
       <TextBlock Text="Zanimivost:" FontWeight="Bold"/>
 
-      <TextBlock Text="{Binding Bpm, StringFormat='{}Tvoje telo v enem dnevu pokuri približno {0:F0} kalorij, če samo počivaš.'}"
+      <TextBlock Text="{Binding Bmr, StringFormat='{}Tvoje telo v enem dnevu pokuri približno {0:F0} kalorij, če samo počivaš.'}"
                  TextWrapping="Wrap"/>
 
     </StackPanel>

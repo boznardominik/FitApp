@@ -33,7 +33,15 @@ namespace FitApp.Models
 
         public Aktivnost(string naslov, VrstaAktivnosti vrsta, double pot,double hitrost, double visinska)
         {
-            this.Naslov = naslov;
+            if (naslov == "")
+            {
+                this.Naslov = vrsta.ToString();
+            }
+            else
+            {
+                this.Naslov = naslov;
+
+            }
             this.Vrsta = vrsta;
             this.Pot = pot;
             this.Hitrost = hitrost;

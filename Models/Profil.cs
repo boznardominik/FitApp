@@ -89,6 +89,9 @@ namespace FitApp.Models
         }
         public static Profil? Preberi()
         {
+
+
+         
             if (!File.Exists(profilPot))
                 return null;
             try

@@ -14,10 +14,10 @@ namespace FitApp.ViewModels
     public partial class VnosViewModel : ViewModelBase
     {
         public event Action? ProfilShranjen;
-        
-       
+
+
         [ObservableProperty]
-        private Spol spol = Models.Spol.Moski;
+        private Spol spol;
         [ObservableProperty]
         private int starost;
         [ObservableProperty]
@@ -33,8 +33,43 @@ namespace FitApp.ViewModels
         [ObservableProperty]
         private string errorMessage = "";
 
+        public bool JeMoski
+        {
+            get => Spol == Spol.Moski;
+            set
+            {
+                if (value)
+                {
+                    Spol = Spol.Moski;
+                }
+            }
+        }
+        public bool JeZenska
+        {
+            get => Spol == Spol.Zenska;
+            set
+            {
+                if (value)
+                {
+                    Spol = Spol.Zenska;
+                }
+            }
+        }
 
 
+        public VnosViewModel()
+        {
+            if (Profil.ProfilObstaja())
+            {
+                Profil profil = Profil.Preberi();
+
+                Spol = profil.Spol;
+                Starost = profil.Starost;
+                Teza = profil.Teza;
+                Visina = profil.Visina;
+                Forma = profil.Forma;
+            }
+        }
 
         [RelayCommand]
         private void Shrani()
@@ -62,7 +97,7 @@ namespace FitApp.ViewModels
                 Profil profil = new Profil(Spol,Starost,Teza,Visina,Forma);
                 Profil.ShraniProfil(profil);
                 ProfilShranjen?.Invoke();
-                info = "Profil je bil uspešno shranjen";
+                
                       
             }
 

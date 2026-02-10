@@ -58,10 +58,13 @@ namespace FitApp.ViewModels
         [RelayCommand]
         public void PokaziProfil()
         {
+            ProfileVM.OsveziProfil();
+
             CurrentViewModel = ProfileVM;
         }
         private void OnProfilShranjeno()
         {
+            ProfileVM.OsveziProfil();
             VidnostNavigacij = true;
             CurrentViewModel = ProfileVM;  
         }
