@@ -122,8 +122,26 @@ namespace FitApp.Models
             }
             return aktivnosti[a].Pot + SkupnaPot(aktivnosti, a + 1);
         }
+
+        public static double SkupneKalorije(ObservableCollection<Aktivnost> aktivnosti,Profil profil)
+        {
+            double skupneKcal = 0;
+            foreach(var aktivnost in aktivnosti)
+            {
+                skupneKcal =+ CAL(aktivnost,profil);
+            }
+            return skupneKcal;
+        }
         
-            
+        public static double PovpHitrost(ObservableCollection<Aktivnost> aktivnosti)
+        {
+            double PHitrost = 0;
+            foreach(var aktivnost in aktivnosti)
+            {
+                PHitrost =+ aktivnost.Hitrost;
+            }
+            return PHitrost / aktivnosti.Count();
+        }
         
     }
 }

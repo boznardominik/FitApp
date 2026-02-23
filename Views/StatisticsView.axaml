@@ -7,18 +7,56 @@
              x:Class="FitApp.Views.StatisticsView"
              x:DataType="vm:StatisticsViewModel"
              >
- <StackPanel Margin="20" HorizontalAlignment="Left" Width="520" Spacing="12">
+ <StackPanel  HorizontalAlignment="Left" Margin="0,0,0,0" Spacing="18">
 
-  <TextBlock Text="Statistika"
-             FontSize="22"
-             FontWeight="Bold"
-             Margin="0,0,0,6"/>
-     <TextBlock Text="{Binding SkupnaPot, StringFormat='Skupna pot: {0} km.'}"
-             
-             FontWeight="Bold"
-             Margin="0,0,0,6"/>
+        
+        <TextBlock Text="Statistika"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   Margin="0,-5,0,5"/>
 
+       
+        <Border Background="White"
+                CornerRadius="12"
+                Padding="20"
+                BorderBrush="#D0D0D0"
+                BorderThickness="1"
+                Width="420">
 
+            <StackPanel Spacing="12">
 
-     </StackPanel>
+               
+                <StackPanel>
+                    <TextBlock Text="Skupna razdalja"
+                               Foreground="Gray"/>
+                    <TextBlock Text="{Binding SkupnaPot, StringFormat='{}{0:F1} km'}"
+                               FontSize="22"
+                               FontWeight="Bold"/>
+                </StackPanel>
+
+                
+                <StackPanel>
+                    <TextBlock Text="Skupaj porabljene kalorije"
+                               Foreground="Gray"/>
+                    <TextBlock Text="{Binding SkupneKalorije, StringFormat='{}{0:F0} kcal'}"
+                               FontSize="22"
+                               FontWeight="Bold"/>
+                </StackPanel>
+
+              
+                <StackPanel>
+                    <TextBlock Text="Povpre?na hitrost"
+                               Foreground="Gray"/>
+                    <TextBlock Text="{Binding PovprecnaHitrost, StringFormat='{}{0:F2} km/h'}"
+                               FontSize="22"
+                               FontWeight="Bold"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+      
+
+    </StackPanel>
+
 </UserControl>

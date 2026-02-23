@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Metadata;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FitApp.Models;
@@ -19,6 +20,10 @@ namespace FitApp.ViewModels
         private ObservableCollection<Aktivnost> aktivnosti;
         [ObservableProperty]
         private double skupnaPot;
+        [ObservableProperty]
+        private double skupneKalorije;
+        [ObservableProperty]
+        private double povprecnaHitrost;
         public StatisticsViewModel()
         {
             Osvezi();
@@ -29,7 +34,11 @@ namespace FitApp.ViewModels
     public void Osvezi()
     {
         Aktivnosti = Aktivnost.PreberiVse();
-        SkupnaPot = Izracuni.SkupnaPot(Aktivnosti); // tvoja rekurzivna metoda
+        Profil profil = Profil.Preberi();
+        skupnaPot = Izracuni.SkupnaPot(Aktivnosti); // tvoja rekurzivna metoda
+        skupneKalorije = Izracuni.SkupneKalorije(Aktivnosti, profil);
+        povprecnaHitrost = Izracuni.PovpHitrost(Aktivnosti);
+
     }
         
         

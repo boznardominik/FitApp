@@ -136,7 +136,7 @@ namespace FitApp.Models
             }
             return this.Pot.CompareTo(other.Pot);      
         }
-        public static void InsortionSort<T>(ObservableCollection<T> collection, Func<T,T,int> compare)
+        public static void InsertionSort<T>(ObservableCollection<T> collection, Func<T,T,int> compare)
         {
             for (int i = 1; i < collection.Count; i++)
             {

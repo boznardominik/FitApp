@@ -4,22 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               
              xmlns:vm="using:FitApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
              x:Class="FitApp.Views.VnosView"
              x:DataType="vm:VnosViewModel"            
-             Width="400"
+             Width="800"
              Height="600">
       
 
             
-            <StackPanel VerticalAlignment="Top"
+            <StackPanel  VerticalAlignment="Top"
                         HorizontalAlignment="Left" 
-                        Margin="13">
+                        >
               <TextBlock DockPanel.Dock="Top"
                         Text="Vpiši svoje podatke"
                         VerticalAlignment="Top"
                         
-                         Margin="15,30,0,0"
+                         Margin="0,30,0,0"
                         FontWeight="Bold"
                         FontSize="20"
                          

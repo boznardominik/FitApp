@@ -14,7 +14,7 @@
     <TextBlock Text="Aktivnosti" FontSize="22" FontWeight="Bold" Margin="15,0,0,0"/>
 <Grid Margin="16" ColumnDefinitions="*,360" ColumnSpacing="16">
 
-    <StackPanel Grid.Column="0" Spacing="3">
+    <StackPanel Grid.Column="0" Spacing="2">
         <TextBlock
         >Naslov:</TextBlock>
         <TextBox Watermark="Naslov" Text="{Binding NaslovU, Mode=TwoWay}" Width="230"
@@ -48,16 +48,29 @@
 
            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red"/> 
        </StackPanel>
-       <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" IsVisible="{Binding Izbrano}"
-            CornerRadius="8" Padding="12">
-          <StackPanel Spacing="8" IsVisible="{Binding VidnostPodrobnosti}">
-               
-               <TextBlock  Text="{Binding Cal, StringFormat=' {0} kcal'}"/>
+       <Border Grid.Column="1" Background="White"
+                CornerRadius="12"
+                Padding="20"
+                BorderBrush="#D0D0D0"
+                BorderThickness="1" IsVisible="{Binding VidnostPodrobnosti}"
+            >
+                
+              <StackPanel Grid.Column="1" Spacing="8" IsVisible="{Binding VidnostPodrobnosti}">
+               <TextBlock  Text="{Binding IzbranUI.Aktivnost.Naslov, StringFormat='PODROBNOSTI AKTIVNOSTI: {0} '}"  FontWeight="Bold" FontSize="17"/>
+               <TextBlock Text="{Binding Cal, StringFormat=' {0} kcal'}"/>
                <TextBlock  Text="{Binding Calk, StringFormat=' {0} kcal/km'}"/>
                <TextBlock  Text="{Binding Tempo, StringFormat=' Tempo: {0} min/km'}"/>
                <TextBlock  Text="{Binding Cas, StringFormat=' Čas: {0} '}"/>
+               <TextBlock Text="{Binding IzbranUI.Medalja}"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Foreground="{Binding IzbranUI.MedaljaBarva}"/>
+
               
               </StackPanel>
+           
+
+
      </Border>
        
        
@@ -74,8 +87,7 @@
         <Button Content="Izbriši"
                 Command="{Binding RemoveSelectedCommand}"/>
 
-        <Button Content="Podrobnosti"
-                Command="{Binding RezultatiCommand}"/>
+   
     </StackPanel>
 
     <!-- RIGHT SIDE CONTROLS -->
@@ -93,36 +105,57 @@
 </Grid>
 
    
-   <ListBox ItemsSource="{Binding Aktivnosti}"
-         SelectedItem="{Binding IzbranaAktivnost, Mode=TwoWay}"
-         SelectionMode="Multiple"
-         Margin="0,10,0,0">
+   <ListBox ItemsSource="{Binding AktivnostiUI}"
+         SelectedItem="{Binding IzbranUI, Mode=TwoWay}"
+         SelectionMode="Single"
+         Height="500"
+         >
 
-  <ListBox.ItemsPanel>
-    <ItemsPanelTemplate>
-      <WrapPanel Orientation="Horizontal"
-                 ItemWidth="260"
-                 ItemHeight="140"/>
-    </ItemsPanelTemplate>
-  </ListBox.ItemsPanel>
+   
 
-  <ListBox.ItemTemplate>
-    <DataTemplate>
-      <Border BorderThickness="1"
-              BorderBrush="#B0C4DE"
-              CornerRadius="8"
-              Padding="10"
-              Margin="6">
-        <StackPanel Spacing="4">
-          <TextBlock Text="{Binding Naslov}" FontWeight="Bold" FontSize="14"/>
-          <TextBlock Text="{Binding Vrsta}"/>
-          <TextBlock Text="{Binding Pot, StringFormat='Pot: {0} km'}"/>
-          <TextBlock Text="{Binding Hitrost, StringFormat='Hitrost: {0:F1} km/h'}"/>
-          <TextBlock Text="{Binding Visinska, StringFormat='Višinska: {0} m'}"/>
-        </StackPanel>
-      </Border>
-    </DataTemplate>
-  </ListBox.ItemTemplate>
+    <ListBox.ItemTemplate>
+        <DataTemplate>
+            <Border BorderThickness="0"
+                    BorderBrush="#B0C4DE"
+                    CornerRadius="8"
+                    Padding="2"
+                    Margin="0,0,0,2"
+                    Background="White"
+                    >
+
+                <Grid RowDefinitions="Auto,Auto"
+                      ColumnDefinitions="24,Auto"
+                      ColumnSpacing="1">
+                    <TextBlock Grid.Column="0" Text="{Binding Medalja}"
+                               IsVisible="{Binding ImaMedaljo}"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="{Binding MedaljaBarva}"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+						
+                        <TextBlock Text="{Binding Aktivnost.Naslov}"
+                               FontWeight="Bold"
+                               FontSize="14"/>
+                        <TextBlock Text="•"/>
+                        <TextBlock Text="{Binding Aktivnost.Vrsta}"/>
+                        <TextBlock Text="•"/>
+                        <TextBlock Text="{Binding Aktivnost.Pot, StringFormat='Pot: {0} km'}"/>
+                        <TextBlock Text="•"/>
+                        <TextBlock Text="{Binding Aktivnost.Hitrost, StringFormat='Hitrost: {0:F1} km/h'}"/>
+                        <TextBlock Text="{Binding Aktivnost.Visinska, StringFormat='Višinska: {0} m'}"/> 
+
+                   <!--      <TextBlock Text="{Binding Kalorije, StringFormat='Kcal: {0:F0}'}" 
+                                   FontWeight="SemiBold"
+                                   Margin="0,4,0,0"/>  -->
+                    </StackPanel>
+
+                    
+
+                </Grid>
+
+            </Border>
+        </DataTemplate>
+    </ListBox.ItemTemplate>
 
 </ListBox>
 

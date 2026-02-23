@@ -24,12 +24,11 @@ namespace FitApp.ViewModels
         [ObservableProperty]
         private int steviloAktivnosti;
         
-        [ObservableProperty]
-        private Aktivnost izbranaAktivnost;
+        
 
 
         [ObservableProperty]
-        private List<string> sortKriteriji = new List<string> { "Naslov", "Vrsta", "Hitrost", "Pot" };
+        private List<string> sortKriteriji = new List<string> { "Naslov", "Vrsta", "Hitrost", "Pot", "Kalorije" };
         [ObservableProperty]
         private string izbranSort = "Vrsta";
 
@@ -71,36 +70,40 @@ namespace FitApp.ViewModels
             
             Aktivnosti = Aktivnost.PreberiVse();
             SteviloAktivnosti = Aktivnosti.Count();
+            OsveziUI();
         }
 
         
         [RelayCommand]
         private void Sort() 
-        { 
+        {
+            
             Aktivnosti = Aktivnost.PreberiVse();
+            OsveziUI();
             switch (IzbranSort)
             {
                 case "Naslov":
-                    Aktivnost.InsortionSort(Aktivnosti, (a, b) => string.Compare(a.Naslov, b.Naslov));
+                    Aktivnost.InsertionSort(AktivnostiUI, (a, b) => string.Compare(a.Aktivnost.Naslov, b.Aktivnost.Naslov));
                     break;
                 case "Vrsta":
-                    Aktivnost.InsortionSort(Aktivnosti, (a, b) => a.Vrsta.CompareTo(b.Vrsta));
+                    Aktivnost.InsertionSort(AktivnostiUI, (a, b) => a.Aktivnost.Vrsta.CompareTo(b.Aktivnost.Vrsta));
                     break;
                 case "Hitrost":
-                    Aktivnost.InsortionSort(Aktivnosti, (a, b) => a.Hitrost.CompareTo(b.Hitrost));
+                    Aktivnost.InsertionSort(AktivnostiUI, (a, b) => b.Aktivnost.Hitrost.CompareTo(a.Aktivnost.Hitrost));
                     break;
                 case "Pot":
-                    Aktivnost.InsortionSort(Aktivnosti, (a, b) => a.Pot.CompareTo(b.Pot));
+                    Aktivnost.InsertionSort(AktivnostiUI, (a, b) => a.Aktivnost.Pot.CompareTo(b.Aktivnost.Pot));
                     break;
+                case "Kalorije":
+                    Aktivnost.InsertionSort(AktivnostiUI, (a, b) => b.Kalorije.CompareTo(a.Kalorije));
+                    break;
+                case null:
+                    break;
+                case "":
+                    break;
+
                
             };
-
-
-            
-            foreach (var item in Aktivnosti)
-                Console.WriteLine(item);
-
-            Aktivnost.ShraniVse(Aktivnosti);
 
         }
 
@@ -138,6 +141,7 @@ namespace FitApp.ViewModels
                 Aktivnost.ShraniVse(Aktivnosti);
                 Aktivnosti = Aktivnost.PreberiVse();
                 SteviloAktivnosti = Aktivnosti.Count();
+                OsveziUI();
             }
 
             
@@ -152,11 +156,12 @@ namespace FitApp.ViewModels
         private void RemoveSelected()
         {
 
-            if(IzbranaAktivnost != null)
+            if(IzbranUI.Aktivnost != null)
             {
-                Aktivnosti.Remove(IzbranaAktivnost);
+                Aktivnosti.Remove(IzbranUI.Aktivnost);
                 Aktivnost.ShraniVse(Aktivnosti);
                 SteviloAktivnosti = Aktivnosti.Count();
+                OsveziUI();
             }
 
         }
@@ -203,41 +208,97 @@ namespace FitApp.ViewModels
         [ObservableProperty]
         private bool vidnostPodrobnosti;
 
+        
+
+        
+
+
+
         [ObservableProperty]
-        private bool izbrano = false;
+        private ObservableCollection<AktivnostDisplay> aktivnostiUI = new();
 
-        [RelayCommand]
-        private void Rezultati()
+        [ObservableProperty]
+        private AktivnostDisplay? izbranUI;
+
+        partial void OnIzbranUIChanged(AktivnostDisplay? value)
         {
-
-            Izbrano = true;
-
-            Profil profil = Profil.Preberi();
-            
-            if(IzbranaAktivnost == null || profil == null)
+            if (value == null)
             {
                 VidnostPodrobnosti = false;
                 return;
             }
-
-            Cal = Izracuni.CAL(IzbranaAktivnost, profil);
-            Calk = Izracuni.CALk(IzbranaAktivnost, profil);
-            Tempo = Izracuni.Tempo(IzbranaAktivnost);
-            Cas = IzbranaAktivnost.UreMinuteSekunde();        // razsiritvena metoda
-            if (IzbranaAktivnost == null || profil == null)
+            var profil = Profil.Preberi();
+            if (profil == null)
             {
-                VidnostPodrobnosti = true;
+                VidnostPodrobnosti = false;
+                return;
             }
+            Cal = Izracuni.CAL(value.Aktivnost, profil);
+            Calk = Izracuni.CALk(value.Aktivnost, profil);
+            Tempo = Izracuni.Tempo(value.Aktivnost);
+            Cas = value.Aktivnost.UreMinuteSekunde();
             VidnostPodrobnosti = true;
         }
-        [ObservableProperty]
-        private string dosezek = "fd";
-        private void Dosezki()
+
+
+
+        private void OsveziRangInMedalje()
         {
-            Console.WriteLine("Dosezek");
+             
+            // reset rangov
+            foreach (var a in AktivnostiUI)
+                a.Rang = 0;
+
+            for (int r = 1; r <= 3; r++)
+            {
+                double max = double.MinValue;
+                int index = -1;
+
+                for (int i = 0; i < AktivnostiUI.Count; i++)
+                {
+                    // preskoči že rangirane
+                    if (AktivnostiUI[i].Rang != 0)
+                        continue;
+
+                    if (AktivnostiUI[i].Kalorije > max)
+                    {
+                        max = AktivnostiUI[i].Kalorije;
+                        index = i;
+                    }
+                }
+
+                if (index != -1)
+                    AktivnostiUI[index].Rang = r;
+            }   
         }
+        
+        private void OsveziUI()
+        {
+            Aktivnosti = Aktivnost.PreberiVse();
+            var profil = Profil.Preberi();
 
+            
+            AktivnostiUI.Clear();
 
+            foreach (var a in Aktivnosti)
+            {
+                var display = new AktivnostDisplay();
+                display.Aktivnost = a;
 
+                if (profil == null)
+                {
+                    display.Kalorije = 0;
+                }
+                else
+                {
+                    display.Kalorije = Izracuni.CAL(a, profil);
+                }
+                display.Rang = 0;
+
+                AktivnostiUI.Add(display);
+            }
+    
+            OsveziRangInMedalje();
+        }
     }
 }
