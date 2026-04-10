@@ -45,13 +45,13 @@
 
               
                 <StackPanel>
-                    <TextBlock Text="Povpre?na hitrost"
+                    <TextBlock Text="Povprecna hitrost"
                                Foreground="Gray"/>
                     <TextBlock Text="{Binding PovprecnaHitrost, StringFormat='{}{0:F2} km/h'}"
                                FontSize="22"
                                FontWeight="Bold"/>
                 </StackPanel>
-
+                
             </StackPanel>
         </Border>
 

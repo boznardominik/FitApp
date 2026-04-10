@@ -16,6 +16,8 @@ namespace FitApp.ViewModels
 {
     public partial class StatisticsViewModel : ViewModelBase
     {
+
+
         [ObservableProperty]
         private ObservableCollection<Aktivnost> aktivnosti;
         [ObservableProperty]
@@ -30,16 +32,18 @@ namespace FitApp.ViewModels
 
 
         }
+        
+        
         [RelayCommand]
-    public void Osvezi()
-    {
+        public void Osvezi()
+        {
         Aktivnosti = Aktivnost.PreberiVse();
         Profil profil = Profil.Preberi();
-        skupnaPot = Izracuni.SkupnaPot(Aktivnosti); // tvoja rekurzivna metoda
-        skupneKalorije = Izracuni.SkupneKalorije(Aktivnosti, profil);
-        povprecnaHitrost = Izracuni.PovpHitrost(Aktivnosti);
+        SkupnaPot = Izracuni.SkupnaPot(Aktivnosti); // tvoja rekurzivna metoda   
+        SkupneKalorije = Izracuni.SkupneKalorije(Aktivnosti, profil);   // Imena morajo biti z veliko da UI dobi podatek da so se spremenila
+        PovprecnaHitrost = Izracuni.PovpHitrost(Aktivnosti);
 
-    }
+        }
         
         
     }

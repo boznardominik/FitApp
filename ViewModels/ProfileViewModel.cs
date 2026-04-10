@@ -28,7 +28,7 @@ namespace FitApp.ViewModels
         {
             OsveziProfil();
             bmr = Izracuni.BMR(taProfil);
-            Console.WriteLine(TaProfil.Spol);
+            
 
         }
 
