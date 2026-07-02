@@ -5,8 +5,8 @@ This is a simple activity tracking app for a small school class project.
 What app does:
 - users can enter body information
 - than you are able to add fitness activites, for now only (walking, running, cycling, swimming)
-- date is stored simply in locall text files
-- than it calculates simple statistics based on users body and activites information.
+- date is stored simply in local text files
+- it calculates simple statistics based on users body and activites information.
 
 ## Screenshot in repository
 
@@ -17,7 +17,7 @@ App screenshot (FitApp.png)
 - clone (download) the reposetory
 - open the project (FitApp.sln) in program Visual Studio
 - make sure .NET is installed 
-- than install the extension Avalonia for Visual Studio
+- install the extension Avalonia for Visual Studio
 - run the aplication by pressing F5 
 
 
