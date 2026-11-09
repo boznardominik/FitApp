@@ -7,7 +7,7 @@
              x:Class="FitApp.Views.StatisticsView"
              x:DataType="vm:StatisticsViewModel"
              >
- <StackPanel  HorizontalAlignment="Left" Margin="0,0,0,0" Spacing="18">
+ <StackPanel  HorizontalAlignment="Left" Margin="0,0,0,0" Spacing="18" TextElement.Foreground="Black">
 
         
         <TextBlock Text="Statistika"

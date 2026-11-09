@@ -23,7 +23,8 @@
 
       <Grid ColumnDefinitions="140,*"
             RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-            RowSpacing="6">
+            RowSpacing="6"
+            TextElement.Foreground="Black">
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Spol:"/>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TaProfil.Spol}"/>
@@ -45,12 +46,12 @@
                    Text="{Binding TaProfil.Forma, StringFormat='{}{0}%'}"/>
       </Grid>
 
-      <Border Height="1" Background="#DDDDDD" />
+      <Border Height="1" Background="#DDDDDD"  />
 
-      <TextBlock Text="Zanimivost:" FontWeight="Bold"/>
+      <TextBlock Text="Zanimivost:" FontWeight="Bold" Foreground="Black"/>
 
       <TextBlock Text="{Binding Bmr, StringFormat='{}Tvoje telo v enem dnevu pokuri približno {0:F0} kalorij, če samo počivaš.'}"
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" Foreground="Black"/>
 
     </StackPanel>
   </Border>
