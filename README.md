@@ -14,11 +14,20 @@ App screenshot (FitApp.png)
 
 
 ## HOW TO USE ##
-- clone (download) the reposetory
-- open the project (FitApp.sln) in program Visual Studio
-- make sure .NET is installed 
-- install the extension Avalonia for Visual Studio
-- run the aplication by pressing F5 
+
+OPTION 1 : RUN FROM TERMINAL
+
+git clone https://github.com/boznardominik/FitApp.git
+cd FitApp
+dotnet run
+
+OPTION 2 : OPEN IN VISUAL STUDIO
+
+1. clone (download) the reposetory
+2. open the project (FitApp.sln) in program Visual Studio
+3. make sure .NET 8 SDK is installed 
+4. install the extension Avalonia for Visual Studio
+5. run the aplication by pressing F5 
 
 
 ## FUTURE
