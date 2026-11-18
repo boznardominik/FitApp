@@ -15,7 +15,7 @@ The application allows users to record physical activities, manage their persona
 
 App screenshot (FitApp.png)
 
-## HOW TO USE ##
+## HOW TO RUN ##
 
 ## Requirements
 
