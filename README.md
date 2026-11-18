@@ -31,7 +31,9 @@ App screenshot (FitApp.png)
 OPTION 1 : RUN FROM TERMINAL
 
 git clone https://github.com/boznardominik/FitApp.git
+
 cd FitApp
+
 dotnet run
 
 OPTION 2 : RUN IN VISUAL STUDIO
