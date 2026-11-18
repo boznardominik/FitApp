@@ -28,7 +28,7 @@ App screenshot (FitApp.png)
 - Avalonia UI
 - CommunityToolKit.MvvM
 
-OPTION 1 : RUN FROM TERMINAL
+## OPTION 1 : RUN FROM TERMINAL
 
 git clone https://github.com/boznardominik/FitApp.git
 
@@ -36,7 +36,7 @@ cd FitApp
 
 dotnet run
 
-OPTION 2 : RUN IN VISUAL STUDIO
+## OPTION 2 : RUN IN VISUAL STUDIO
 
 1. Clone or download the repository.
 2. Open FitApp.sln in Visual Studio.
