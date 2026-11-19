@@ -39,7 +39,7 @@ namespace FitApp.ViewModels
         {
         Aktivnosti = Aktivnost.PreberiVse();
         Profil profil = Profil.Preberi();
-        SkupnaPot = Izracuni.SkupnaPot(Aktivnosti); // tvoja rekurzivna metoda   
+        SkupnaPot = Izracuni.SkupnaPot(Aktivnosti); // rekurzivna metoda   
         SkupneKalorije = Izracuni.SkupneKalorije(Aktivnosti, profil);   // Imena morajo biti z veliko da UI dobi podatek da so se spremenila
         PovprecnaHitrost = Izracuni.PovpHitrost(Aktivnosti);
 
